@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fahrrad index{% endblock %}
+
+{% block body %}
+    <h1>Fahrrad index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Alter</th>
+                <th>Id</th>
+                <th>Satteltyp</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fahrrad in fahrrads %}
+            <tr>
+                <td>{{ fahrrad.name }}</td>
+                <td>{{ fahrrad.alter }}</td>
+                <td>{{ fahrrad.id }}</td>
+                <td>{{ fahrrad.satteltyp }}</td>
+                <td>
+                    <a href="{{ path('app_fahrrad_show', {'id': fahrrad.id}) }}">show</a>
+                    <a href="{{ path('app_fahrrad_edit', {'id': fahrrad.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_fahrrad_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fahrrad{% endblock %}
+
+{% block body %}
+    <h1>Fahrrad</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ fahrrad.name }}</td>
+            </tr>
+            <tr>
+                <th>Alter</th>
+                <td>{{ fahrrad.alter }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ fahrrad.id }}</td>
+            </tr>
+            <tr>
+                <th>Satteltyp</th>
+                <td>{{ fahrrad.satteltyp }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_fahrrad_index') }}">back to list</a>
+
+    <a href="{{ path('app_fahrrad_edit', {'id': fahrrad.id}) }}">edit</a>
+
+    {{ include('fahrrad/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Fahrrad{% endblock %}
+
+{% block body %}
+    <h1>Edit Fahrrad</h1>
+
+    {{ include('fahrrad/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_fahrrad_index') }}">back to list</a>
+
+    {{ include('fahrrad/_delete_form.html.twig') }}
+{% endblock %}

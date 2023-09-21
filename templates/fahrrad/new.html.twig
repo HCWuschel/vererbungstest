@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Fahrrad{% endblock %}
+
+{% block body %}
+    <h1>Create new Fahrrad</h1>
+
+    {{ include('fahrrad/_form.html.twig') }}
+
+    <a href="{{ path('app_fahrrad_index') }}">back to list</a>
+{% endblock %}
