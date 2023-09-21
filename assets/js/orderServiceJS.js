@@ -5,5 +5,7 @@ global.$ = global.jQuery = $;
 jQuery(function($) {
     var SortierListe = $('#SortierListe');
     console.log(SortierListe)
-
+    $( function() {
+        $('#SortierListe').sortable();
+    } );
 })
