@@ -40,13 +40,16 @@
 
     -start of drag example-
 <form>
+    <ul id="SortierListe">
+
     {% for Buchstabe in Buchstabenreihe %}
-<ul id="SortierListe">
-        <div class="PlatzhalterModul" draggable="true">
+    <li>
+        <div class="PlatzhalterModul">
         {{ Buchstabe }}
         </div>
-</ul>
+    </li>
     {% endfor %}
+    </ul>
 
 
 
