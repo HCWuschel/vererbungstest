@@ -24,6 +24,17 @@ class AutoController extends AbstractController
         ]);
     }
 
+	#[Route('/Listenauswertung', name: 'Listenauswertung', methods: ['GET','POST'])]
+	public function Listenauswertung(AutoRepository $autoRepository, Request $request): Response
+	{
+
+		$Buchstabenreihe = ['A','B'];
+		return $this->render('auto/index.html.twig', [
+			'autos' => $autoRepository->findAll(),
+			'Buchstabenreihe'=>$Buchstabenreihe
+		]);
+	}
+
     #[Route('/new', name: 'app_auto_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {

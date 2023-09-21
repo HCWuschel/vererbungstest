@@ -39,7 +39,7 @@
     <br>
 
     -start of drag example-
-<form>
+<form action="{{ path('Listenauswertung')}}" method="post" id="Listenauswertung" name="Listenauswertung">
     <ul id="SortierListe">
 
     {% for Buchstabe in Buchstabenreihe %}
@@ -51,7 +51,7 @@
     {% endfor %}
     </ul>
 
-
+<button type="submit">Check it out</button>
 
 </form>
 
