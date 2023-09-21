@@ -6,7 +6,8 @@ use App\Repository\FahrradRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FahrradRepository::class)]
-class Fahrrad
+class Fahrrad extends SCFahrzeug
+
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

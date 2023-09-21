@@ -4,14 +4,12 @@ namespace App\Entity;
 
 use App\Repository\SCFahrzeugRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\MappedSuperclass;
 
-#[ORM\Entity(repositoryClass: SCFahrzeugRepository::class)]
+#[MappedSuperclass]
 class SCFahrzeug
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -19,10 +17,7 @@ class SCFahrzeug
     #[ORM\Column]
     private ?int $alter = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+
 
     public function getName(): ?string
     {
