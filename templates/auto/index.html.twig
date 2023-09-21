@@ -36,4 +36,18 @@
     </table>
 
     <a href="{{ path('app_auto_new') }}">Create new</a>
+    <br>
+
+    -start of drag example-
+<form>
+    {% for Buchstabe in Buchstabenreihe %}
+        <div class="PlatzhalterModul">
+        {{ Buchstabe }}
+        </div>
+    {% endfor %}
+
+
+
+</form>
+
 {% endblock %}
