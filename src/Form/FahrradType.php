@@ -13,7 +13,7 @@ class FahrradType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('alter')
+            ->add('age')
             ->add('satteltyp')
         ;
     }
