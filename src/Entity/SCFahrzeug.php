@@ -4,18 +4,40 @@ namespace App\Entity;
 
 use App\Repository\SCFahrzeugRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\MappedSuperclass;
 
 #[MappedSuperclass]
+#[DiscriminatorColumn(name: 'id', type: 'int')]
+
 class SCFahrzeug
 {
+	#[ORM\Id]
+	#[ORM\GeneratedValue]
+	#[ORM\Column]
+	private ?int $id = null;
 
+	/**
+	 * @return int|null
+	 */
+	public function getId(): ?int
+	{
+		return $this->id;
+	}
+
+	/**
+	 * @param int|null $id
+	 */
+	public function setId(?int $id): void
+	{
+		$this->id = $id;
+	}
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
     #[ORM\Column]
-    private ?int $alter = null;
+    private ?int $age = null;
 
 
 
@@ -31,14 +53,14 @@ class SCFahrzeug
         return $this;
     }
 
-    public function getAlter(): ?int
+    public function getAge(): ?int
     {
-        return $this->alter;
+        return $this->age;
     }
 
-    public function setAlter(int $alter): static
+    public function setAge(int $age): static
     {
-        $this->alter = $alter;
+        $this->age = $age;
 
         return $this;
     }
