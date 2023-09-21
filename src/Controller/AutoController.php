@@ -17,8 +17,10 @@ class AutoController extends AbstractController
     #[Route('/', name: 'app_auto_index', methods: ['GET'])]
     public function index(AutoRepository $autoRepository): Response
     {
+		$Buchstabenreihe = ['A','B'];
         return $this->render('auto/index.html.twig', [
             'autos' => $autoRepository->findAll(),
+			'Buchstabenreihe'=>$Buchstabenreihe
         ]);
     }
 
