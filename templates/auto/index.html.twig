@@ -39,7 +39,9 @@
     <br>
 
     -start of drag example-
-<form action="{{ path('Listenauswertung')}}" method="post" id="Listenauswertung" name="Listenauswertung">
+    <h1>Listenauswertung</h1>
+
+    <form action="{{ path('Listenauswertung')}}" method="post" id="Listenauswertung" name="Listenauswertung">
     <ul id="SortierListe">
 
     {% for Fahrzeug in Fahrzeugsammlung %}
@@ -57,5 +59,25 @@
 <button type="submit">Check it out</button>
 
 </form>
+<h1>ListenauswertungStatus</h1>
+    <form action="{{ path('Listenauswertung')}}" method="post" id="ListenauswertungStatus" name="ListenauswertungStatus">
+        <ul id="SortierListe" class="SortierListeStatus">
+
+            {% for Fahrzeug in FahrzeugsammlungFuerStatus %}
+                <li>
+                    <div class="PlatzhalterModulStatus">
+                        {{ Fahrzeug.name }}<br>
+                        {{ Fahrzeug.status }}
+
+                        <input type="hidden" name=" {{ Fahrzeug.name }}" value="{{ Fahrzeug.id }}-{{ Fahrzeug.idUmfassendeKlasse }}">
+
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <button type="submit">Check it out</button>
+
+    </form>
 
 {% endblock %}

@@ -8,3 +8,13 @@
 #SortierListe{
     background-color: green;
 }
+.SortierListeStatus{
+    background-color: orange!important;
+}
+.PlatzhalterModulStatus{
+    background-color: white;
+    width: 80%;
+    margin-left: 10%;
+    min-height: 150px;
+    margin-bottom: 5%;
+}
