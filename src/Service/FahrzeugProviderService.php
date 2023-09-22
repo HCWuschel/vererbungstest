@@ -8,7 +8,7 @@ use App\Entity\Fahrrad;
 use App\Entity\Roller;
 use App\Entity\Tretauto;
 use Doctrine\ORM\EntityManagerInterface;
-use http\Client\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 class FahrzeugProviderService
 {
@@ -33,6 +33,53 @@ class FahrzeugProviderService
 	}
 
 	public function speichereDateninFahrzeugObjekteAusRequestListe(Request $request, EntityManagerInterface $entityManager):void{
+	//Lade Daten in Array
+		$sortierDaten = $request->request->all();
+
+		//Deklariere einen Itterator der die tatsächliche Reihenfolge aufnimmt
+		$sortierItterator = 0;
+		//itterie durch zugrundeliegendes Array
+		foreach ($sortierDaten as $daten){
+			//Erhöhe den Wert des Itterators um 1
+			$sortierItterator +=1;
+			//teile den String
+				$datenTeile = explode("-",$daten);
+			//extrahiere Daten
+			$idDesFahrzeugs = $datenTeile[0];
+			$idUmfassendeKlasse = $datenTeile[1];
+
+			switch ($idUmfassendeKlasse){
+				case 1:
+					$fahrzeug = $entityManager->getRepository(Auto::class)->findOneBy(['id'=>$idDesFahrzeugs]);
+					$fahrzeug->setOrderRank($sortierItterator);
+					$entityManager->flush();
+					break;
+				case 2:
+					$fahrzeug = $entityManager->getRepository(Fahrrad::class)->findOneBy(['id'=>$idDesFahrzeugs]);
+					$fahrzeug->setOrderRank($sortierItterator);
+					$entityManager->flush();
+					break;
+				case 3:
+					$fahrzeug = $entityManager->getRepository(Roller::class)->findOneBy(['id'=>$idDesFahrzeugs]);
+					$fahrzeug->setOrderRank($sortierItterator);
+					$entityManager->flush();
+					break;
+				case 4:
+					$fahrzeug = $entityManager->getRepository(Einrad::class)->findOneBy(['id'=>$idDesFahrzeugs]);
+					$fahrzeug->setOrderRank($sortierItterator);
+					$entityManager->flush();
+					break;
+				case 5:
+					$fahrzeug = $entityManager->getRepository(Tretauto::class)->findOneBy(['id'=>$idDesFahrzeugs]);
+					$fahrzeug->setOrderRank($sortierItterator);
+					$entityManager->flush();
+					break;
+
+			}
+
+	}
+	}
+	public  function ladeInfoBekannteFahrzeuge():array{
 
 	}
 
