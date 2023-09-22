@@ -43,6 +43,25 @@ class SCFahrzeug
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $orderRank = 1;
 
+	#[ORM\Column(length: 255)]
+	private ?string $status = 'Angefragt';
+
+	/**
+	 * @return string|null
+	 */
+	public function getStatus(): ?string
+	{
+		return $this->status;
+	}
+
+	/**
+	 * @param string|null $status
+	 */
+	public function setStatus(?string $status): void
+	{
+		$this->status = $status;
+	}
+
 
 
     public function getName(): ?string
