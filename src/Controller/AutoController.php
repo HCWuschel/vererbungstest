@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Auto;
 use App\Form\AutoType;
 use App\Repository\AutoRepository;
+use App\Service\FahrzeugProviderService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,23 +16,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class AutoController extends AbstractController
 {
     #[Route('/', name: 'app_auto_index', methods: ['GET'])]
-    public function index(AutoRepository $autoRepository): Response
+    public function index(AutoRepository $autoRepository, EntityManagerInterface $entityManager, FahrzeugProviderService $fahrzeugProviderService): Response
     {
-		$Buchstabenreihe = ['A','B'];
-        return $this->render('auto/index.html.twig', [
+		$fahrzeugsammlung = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager);
+
+		return $this->render('auto/index.html.twig', [
             'autos' => $autoRepository->findAll(),
-			'Buchstabenreihe'=>$Buchstabenreihe
+			'Fahrzeugsammlung'=>$fahrzeugsammlung
         ]);
     }
 
 	#[Route('/Listenauswertung', name: 'Listenauswertung', methods: ['GET','POST'])]
-	public function Listenauswertung(AutoRepository $autoRepository, Request $request): Response
+	public function Listenauswertung(AutoRepository $autoRepository, Request $request, EntityManagerInterface $entityManager, FahrzeugProviderService $fahrzeugProviderService): Response
 	{
 
-		$Buchstabenreihe = ['A','B'];
+		$fahrzeugsammlung = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager);
 		return $this->render('auto/index.html.twig', [
 			'autos' => $autoRepository->findAll(),
-			'Buchstabenreihe'=>$Buchstabenreihe
+			'Fahrzeugsammlung'=>$fahrzeugsammlung
 		]);
 	}
 

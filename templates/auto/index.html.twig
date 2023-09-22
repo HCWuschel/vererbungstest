@@ -42,11 +42,11 @@
 <form action="{{ path('Listenauswertung')}}" method="post" id="Listenauswertung" name="Listenauswertung">
     <ul id="SortierListe">
 
-    {% for Buchstabe in Buchstabenreihe %}
+    {% for Fahrzeug in Fahrzeugsammlung %}
     <li>
         <div class="PlatzhalterModul">
-        {{ Buchstabe }}
-            <input type="hidden" value="{{ Buchstabe }}" name="{{ Buchstabe }}">
+        {{ Fahrzeug.name }}
+            <input type="hidden" value="{{ Fahrzeug.name }}" name="{{ Fahrzeug.name }}">
 
         </div>
     </li>
