@@ -20,6 +20,7 @@ class AutoController extends AbstractController
     {
 		$fahrzeugsammlung = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager);
 		$fahrzeugsammlungFürStatus = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager);
+		$fahrzeugsammlungFürStatus = $fahrzeugProviderService->sortiereSortierteFahrzeugNachStatus($fahrzeugsammlungFürStatus);
 
 
 		return $this->render('auto/index.html.twig', [
@@ -35,7 +36,7 @@ class AutoController extends AbstractController
 
 		$fahrzeugsammlung = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager);
 		$fahrzeugsammlungFürStatus = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager);
-
+		$fahrzeugsammlungFürStatus = $fahrzeugProviderService->sortiereSortierteFahrzeugNachStatus($fahrzeugsammlungFürStatus);
 		$fahrzeugProviderService->speichereDateninFahrzeugObjekteAusRequestListe($request,$entityManager);
 		return $this->render('auto/index.html.twig', [
 			'autos' => $autoRepository->findAll(),
