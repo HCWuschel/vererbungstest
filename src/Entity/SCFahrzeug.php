@@ -14,25 +14,25 @@ use Doctrine\ORM\Mapping\MappedSuperclass;
 class SCFahrzeug
 {
 	#[ORM\Id]
-            	#[ORM\GeneratedValue]
-            	#[ORM\Column]
-            	private ?int $id = null;
+                     	#[ORM\GeneratedValue]
+                     	#[ORM\Column]
+                     	private ?int $id = null;
 
 	/**
 	 * @return int|null
 	 */
 	public function getId(): ?int
-            	{
-            		return $this->id;
-            	}
+                     	{
+                     		return $this->id;
+                     	}
 
 	/**
 	 * @param int|null $id
 	 */
 	public function setId(?int $id): void
-            	{
-            		$this->id = $id;
-            	}
+                     	{
+                     		$this->id = $id;
+                     	}
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -44,23 +44,26 @@ class SCFahrzeug
     private ?int $orderRank = 1;
 
 	#[ORM\Column(length: 255)]
-	private ?string $status = 'Angefragt';
+         	private ?string $status = 'Angefragt';
+
+    #[ORM\Column]
+    private ?int $idUmfassendeKlasse = 1;
 
 	/**
 	 * @return string|null
 	 */
 	public function getStatus(): ?string
-	{
-		return $this->status;
-	}
+         	{
+         		return $this->status;
+         	}
 
 	/**
 	 * @param string|null $status
 	 */
 	public function setStatus(?string $status): void
-	{
-		$this->status = $status;
-	}
+         	{
+         		$this->status = $status;
+         	}
 
 
 
@@ -96,6 +99,18 @@ class SCFahrzeug
     public function setOrderRank(int $orderRank): static
     {
         $this->orderRank = $orderRank;
+
+        return $this;
+    }
+
+    public function getIdUmfassendeKlasse(): ?int
+    {
+        return $this->idUmfassendeKlasse;
+    }
+
+    public function setIdUmfassendeKlasse(int $idUmfassendeKlasse): static
+    {
+        $this->idUmfassendeKlasse = $idUmfassendeKlasse;
 
         return $this;
     }
