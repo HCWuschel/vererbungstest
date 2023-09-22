@@ -31,6 +31,7 @@ class AutoController extends AbstractController
 	{
 
 		$fahrzeugsammlung = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager);
+		$fahrzeugProviderService->speichereDateninFahrzeugObjekteAusRequestListe($request,$entityManager);
 		return $this->render('auto/index.html.twig', [
 			'autos' => $autoRepository->findAll(),
 			'Fahrzeugsammlung'=>$fahrzeugsammlung

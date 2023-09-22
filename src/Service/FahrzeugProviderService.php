@@ -8,6 +8,7 @@ use App\Entity\Fahrrad;
 use App\Entity\Roller;
 use App\Entity\Tretauto;
 use Doctrine\ORM\EntityManagerInterface;
+use http\Client\Request;
 
 class FahrzeugProviderService
 {
@@ -28,6 +29,10 @@ class FahrzeugProviderService
 
 		return $fahrzeugsammlung;
 
+
+	}
+
+	public function speichereDateninFahrzeugObjekteAusRequestListe(Request $request, EntityManagerInterface $entityManager):void{
 
 	}
 
