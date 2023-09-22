@@ -32,8 +32,27 @@ class FahrzeugProviderService
 
 	}
 	public function sortiereFahrzeugArrayNachOrderRank(array $fahrzeugsammlung):array{
+		$neueSortierung = [];
+		//Der letzte Platz kann bei voller Nutzung aller Objekte nur maximal der Anzahl aller möglichen Objekte entsprechen
+		//Hier gibt es 5 Fahrzeugtypen
+		$maximalerSortierWert = 5;
+		//Es wird keine 0 Werte geben können udn somit bei der 1 begonnen
+		$wertSortierabfrage = 1;
 
-		return  '';
+		//Einleiten einer begrenzten For-Schleife
+		for($wertSortierabfrage; $wertSortierabfrage<=$maximalerSortierWert; $wertSortierabfrage++){
+			//iteriere durch jedes Fahrzeug
+			foreach ($fahrzeugsammlung as $fahrzeug){
+				//Prüfe ob Fahrzeug orderRank gleich dem aktuellen Stellenwert ist
+				if($fahrzeug->getOrderRank() == $wertSortierabfrage){
+					//Füge dies nun in die richtige Sortierung ein
+					array_push($neueSortierung,$fahrzeug);
+				}
+			}
+
+		}
+
+		return  $neueSortierung;
 	}
 
 	public function speichereDateninFahrzeugObjekteAusRequestListe(Request $request, EntityManagerInterface $entityManager):void{
