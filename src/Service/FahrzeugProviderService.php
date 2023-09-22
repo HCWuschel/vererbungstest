@@ -26,10 +26,14 @@ class FahrzeugProviderService
 		array_push($fahrzeugsammlung,$einEinrad);
 		$einTretauto = $entityManager->getRepository(Tretauto::class)->findOneBy(['id'=>1]);
 		array_push($fahrzeugsammlung,$einTretauto);
-
+		$fahrzeugsammlung = $this->sortiereFahrzeugArrayNachOrderRank($fahrzeugsammlung);
 		return $fahrzeugsammlung;
 
 
+	}
+	public function sortiereFahrzeugArrayNachOrderRank(array $fahrzeugsammlung):array{
+
+		return  '';
 	}
 
 	public function speichereDateninFahrzeugObjekteAusRequestListe(Request $request, EntityManagerInterface $entityManager):void{
