@@ -102,7 +102,9 @@ class FahrzeugProviderService
 
 	}
 	}
-	public  function ladeInfoBekannteFahrzeuge():array{
+	public  function sortiereSortierteFahrzeugNachStatus(array $fahrzeugsammlungFürStatus):array{
+
+		return '';
 
 	}
 
