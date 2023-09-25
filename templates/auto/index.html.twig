@@ -101,7 +101,7 @@
     <form action="{{ path('Listenauswertung')}}" method="post" id="ListenauswertungStatusUsort" name="ListenauswertungStatus">
         <ul id="SortierListe" class="ListenauswertungStatusUsort">
 
-            {% for Fahrzeug in FahrzeugsammlungFuerStatus %}
+            {% for Fahrzeug in FahrzeugsammlungFuerStatusUsort %}
                 <li>
                     <div class="PlatzhalterModulStatus">
                         {{ Fahrzeug.fahrzeug.name }}<br>
