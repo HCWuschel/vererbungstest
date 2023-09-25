@@ -11,6 +11,12 @@
 .SortierListeStatus{
     background-color: orange!important;
 }
+.ListenauswertungUsort{
+    background-color: #3b82f6!important;
+}
+.ListenauswertungStatusUsort{
+    background-color: yellow!important;
+}
 .PlatzhalterModulStatus{
     background-color: white;
     width: 80%;

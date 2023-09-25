@@ -80,4 +80,43 @@
 
     </form>
 
+<h1>Listenauswertung per Usort</h1>
+
+<form action="{{ path('Listenauswertung')}}" method="post" id="ListenauswertungUsort" name="Listenauswertung">
+    <ul id="SortierListe" class="ListenauswertungUsort">
+
+        {% for Fahrzeug in Fahrzeugsammlung %}
+            <li>
+                <div class="PlatzhalterModul">
+                    {{ Fahrzeug.name }}
+
+                    <input type="hidden" name=" {{ Fahrzeug.name }}" value="{{ Fahrzeug.id }}-{{ Fahrzeug.idUmfassendeKlasse }}">
+
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</form>
+    <h1>ListenauswertungStatus per Usort</h1>
+    <form action="{{ path('Listenauswertung')}}" method="post" id="ListenauswertungStatusUsort" name="ListenauswertungStatus">
+        <ul id="SortierListe" class="ListenauswertungStatusUsort">
+
+            {% for Fahrzeug in FahrzeugsammlungFuerStatus %}
+                <li>
+                    <div class="PlatzhalterModulStatus">
+                        {{ Fahrzeug.name }}<br>
+                        {{ Fahrzeug.status }}
+
+                        <input type="hidden" name=" {{ Fahrzeug.name }}" value="{{ Fahrzeug.id }}-{{ Fahrzeug.idUmfassendeKlasse }}">
+
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <button type="submit">Check it out</button>
+
+    </form>
+
+
 {% endblock %}
