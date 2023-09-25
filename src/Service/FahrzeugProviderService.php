@@ -103,8 +103,22 @@ class FahrzeugProviderService
 	}
 	}
 	public  function sortiereSortierteFahrzeugNachStatus(array $fahrzeugsammlungFürStatus):array{
+		//Sortierung der Stadien nach Erscheinungszeitpunkt
+		$stadien = ['Zurückgewiesen','Angefragt','Eingereicht','Bestätigt'];
+		$neueSortierung = [];
+		//Itteration durch stadien nach Erscheinungszeitpunkt
+		foreach ($stadien as $status){
+			//iteriere durch jedes Fahrzeug
+			foreach ($fahrzeugsammlungFürStatus as $fahrzeug){
+				//Prüfe, ob Status des Fahrzeuges dem aktuellen Status aus Stadien entspricht
+				if($fahrzeug->getStatus() == $status){
+					//Füge es somit an der richtigen Stelle in ein neues Array
+					array_push($neueSortierung,$fahrzeug);
+				}
 
-		return '';
+			}
+		}
+		return $neueSortierung;
 
 	}
 
