@@ -38,6 +38,8 @@ class UmgebendesFahrzeug{
 }
 class FahrzeugProviderService
 {
+private $stadienEnum = ['Zurückgewiesen'=>1,'Angefragt'=>2,'Eingereicht'=>3,'Bestätigt'=>4];
+
 
 	public function holeEinFahrzeugMitIdEinsUndGibInArray(EntityManagerInterface $entityManager, string $info) :array{
 		$fahrzeugsammlung = [];
@@ -87,6 +89,7 @@ class FahrzeugProviderService
 		return  $neueSortierung;
 	}
 	 private function usortOrderRank($fahrzeug1, $fahrzeug2){
+		//Wenn <, dann gib -1 zurück, wenn > dann gib +1 zurück uns sortiere entsprechend
 		return $fahrzeug1->getFahrzeug()->getOrderRank()<=>$fahrzeug2->getFahrzeug()->getOrderRank();
 
 	}
@@ -144,6 +147,7 @@ class FahrzeugProviderService
 
 	}
 	}
+
 	public  function sortiereSortierteFahrzeugNachStatus(array $fahrzeugsammlungFürStatus):array{
 		//Sortierung der Stadien nach Erscheinungszeitpunkt
 		$stadien = ['Zurückgewiesen','Angefragt','Eingereicht','Bestätigt'];
@@ -161,6 +165,17 @@ class FahrzeugProviderService
 			}
 		}
 		return $neueSortierung;
+
+	}
+	private function usortStatus($fahrzeug1, $fahrzeug2){
+		//Wenn <, dann gib -1 zurück, wenn > dann gib +1 zurück uns sortiere entsprechend
+		return $fahrzeug1->getFahrzeug()->getStatus()<=>$fahrzeug2->getFahrzeug()->getStatus();
+
+	}
+	public function sortiereSortierteFahrzeugNachStatusUsort(array $fahrzeugsammlungFürStatus):array{
+		usort($fahrzeugsammlungFürStatus,[$this,"usortStatus"]);
+
+		return  $fahrzeugsammlungFürStatus;
 
 	}
 
