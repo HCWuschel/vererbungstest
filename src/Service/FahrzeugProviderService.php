@@ -6,27 +6,59 @@ use App\Entity\Auto;
 use App\Entity\Einrad;
 use App\Entity\Fahrrad;
 use App\Entity\Roller;
+use App\Entity\SCFahrzeug;
 use App\Entity\Tretauto;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+class UmgebendesFahrzeug{
+
+
+	private SCFahrzeug $fahrzeug;
+
+	/**
+	 * @return SCFahrzeug
+	 */
+
+	function __construct($Fahrzeug){
+		$this->fahrzeug = $Fahrzeug;
+	}
+	public function getFahrzeug(): SCFahrzeug
+	{
+		return $this->fahrzeug;
+	}
+
+	/**
+	 * @param SCFahrzeug $fahrzeug
+	 */
+	public function setFahrzeug(SCFahrzeug $fahrzeug): void
+	{
+		$this->fahrzeug = $fahrzeug;
+	}
+}
 class FahrzeugProviderService
 {
 
-	public function holeEinFahrzeugMitIdEinsUndGibInArray(EntityManagerInterface $entityManager) :array{
+	public function holeEinFahrzeugMitIdEinsUndGibInArray(EntityManagerInterface $entityManager, string $info) :array{
 		$fahrzeugsammlung = [];
 
 		$einAuto = $entityManager->getRepository(Auto::class)->findOneBy(['id'=>1]);
-		array_push($fahrzeugsammlung,$einAuto);
+		array_push($fahrzeugsammlung,new UmgebendesFahrzeug($einAuto));
 		$einFahrrad = $entityManager->getRepository(Fahrrad::class)->findOneBy(['id'=>1]);
-		array_push($fahrzeugsammlung,$einFahrrad);
+		array_push($fahrzeugsammlung,new UmgebendesFahrzeug($einFahrrad));
 		$einRoller = $entityManager->getRepository(Roller::class)->findOneBy(['id'=>1]);
-		array_push($fahrzeugsammlung,$einRoller);
+		array_push($fahrzeugsammlung,new UmgebendesFahrzeug($einRoller));
 		$einEinrad = $entityManager->getRepository(Einrad::class)->findOneBy(['id'=>1]);
-		array_push($fahrzeugsammlung,$einEinrad);
+		array_push($fahrzeugsammlung,new UmgebendesFahrzeug($einEinrad));
 		$einTretauto = $entityManager->getRepository(Tretauto::class)->findOneBy(['id'=>1]);
-		array_push($fahrzeugsammlung,$einTretauto);
-		$fahrzeugsammlung = $this->sortiereFahrzeugArrayNachOrderRank($fahrzeugsammlung);
+		array_push($fahrzeugsammlung,new UmgebendesFahrzeug($einTretauto));
+		if($info == "normal"){
+			$fahrzeugsammlung = $this->sortiereFahrzeugArrayNachOrderRank($fahrzeugsammlung);
+
+		}
+		if($info == "usort"){
+			$fahrzeugsammlung = $this->sortiereFahrzeugArrayNachOrderRankUsort($fahrzeugsammlung);
+		}
 		return $fahrzeugsammlung;
 
 
@@ -44,7 +76,7 @@ class FahrzeugProviderService
 			//iteriere durch jedes Fahrzeug
 			foreach ($fahrzeugsammlung as $fahrzeug){
 				//Prüfe ob Fahrzeug orderRank gleich dem aktuellen Stellenwert ist
-				if($fahrzeug->getOrderRank() == $wertSortierabfrage){
+				if($fahrzeug->getFahrzeug()->getOrderRank() == $wertSortierabfrage){
 					//Füge dies nun in die richtige Sortierung ein
 					array_push($neueSortierung,$fahrzeug);
 				}
@@ -54,7 +86,17 @@ class FahrzeugProviderService
 
 		return  $neueSortierung;
 	}
+	 private function usortOrderRank($fahrzeug1, $fahrzeug2){
+		return $fahrzeug1->getFahrzeug()->getOrderRank()<=>$fahrzeug2->getFahrzeug()->getOrderRank();
 
+	}
+
+	public function sortiereFahrzeugArrayNachOrderRankUsort(array $fahrzeugsammlung):array{
+
+		usort($fahrzeugsammlung,[$this,"usortOrderRank"]);
+
+		return  $fahrzeugsammlung;
+	}
 	public function speichereDateninFahrzeugObjekteAusRequestListe(Request $request, EntityManagerInterface $entityManager):void{
 	//Lade Daten in Array
 		$sortierDaten = $request->request->all();
@@ -111,7 +153,7 @@ class FahrzeugProviderService
 			//iteriere durch jedes Fahrzeug
 			foreach ($fahrzeugsammlungFürStatus as $fahrzeug){
 				//Prüfe, ob Status des Fahrzeuges dem aktuellen Status aus Stadien entspricht
-				if($fahrzeug->getStatus() == $status){
+				if($fahrzeug->getFahrzeug()->getStatus() == $status){
 					//Füge es somit an der richtigen Stelle in ein neues Array
 					array_push($neueSortierung,$fahrzeug);
 				}

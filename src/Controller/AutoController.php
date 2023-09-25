@@ -18,14 +18,16 @@ class AutoController extends AbstractController
     #[Route('/', name: 'app_auto_index', methods: ['GET'])]
     public function index(AutoRepository $autoRepository, EntityManagerInterface $entityManager, FahrzeugProviderService $fahrzeugProviderService): Response
     {
-		$fahrzeugsammlung = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager);
-		$fahrzeugsammlungFürStatus = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager);
+		$fahrzeugsammlung = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager,'normal');
+		$fahrzeugsammlungFürStatus = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager,'normal');
 		$fahrzeugsammlungFürStatus = $fahrzeugProviderService->sortiereSortierteFahrzeugNachStatus($fahrzeugsammlungFürStatus);
+		$fahrzeugsammlungUsort = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager,'usort');
 
 
 		return $this->render('auto/index.html.twig', [
             'autos' => $autoRepository->findAll(),
 			'Fahrzeugsammlung'=>$fahrzeugsammlung,
+			'FahrzeugsammlungUsort'=>$fahrzeugsammlungUsort,
 			'FahrzeugsammlungFuerStatus'=>$fahrzeugsammlungFürStatus
         ]);
     }
@@ -34,8 +36,8 @@ class AutoController extends AbstractController
 	public function Listenauswertung(AutoRepository $autoRepository, Request $request, EntityManagerInterface $entityManager, FahrzeugProviderService $fahrzeugProviderService): Response
 	{
 
-		$fahrzeugsammlung = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager);
-		$fahrzeugsammlungFürStatus = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager);
+		$fahrzeugsammlung = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager,'normal');
+		$fahrzeugsammlungFürStatus = $fahrzeugProviderService->holeEinFahrzeugMitIdEinsUndGibInArray($entityManager,'normal');
 		$fahrzeugsammlungFürStatus = $fahrzeugProviderService->sortiereSortierteFahrzeugNachStatus($fahrzeugsammlungFürStatus);
 		$fahrzeugProviderService->speichereDateninFahrzeugObjekteAusRequestListe($request,$entityManager);
 		return $this->render('auto/index.html.twig', [

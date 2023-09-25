@@ -47,9 +47,9 @@
     {% for Fahrzeug in Fahrzeugsammlung %}
     <li>
         <div class="PlatzhalterModul">
-        {{ Fahrzeug.name }}
+        {{ Fahrzeug.fahrzeug.name }}
 
-            <input type="hidden" name=" {{ Fahrzeug.name }}" value="{{ Fahrzeug.id }}-{{ Fahrzeug.idUmfassendeKlasse }}">
+            <input type="hidden" name=" {{ Fahrzeug.fahrzeug.name }}" value="{{ Fahrzeug.fahrzeug.id }}-{{ Fahrzeug.fahrzeug.idUmfassendeKlasse }}">
 
         </div>
     </li>
@@ -66,10 +66,10 @@
             {% for Fahrzeug in FahrzeugsammlungFuerStatus %}
                 <li>
                     <div class="PlatzhalterModulStatus">
-                        {{ Fahrzeug.name }}<br>
-                        {{ Fahrzeug.status }}
+                        {{ Fahrzeug.fahrzeug.name }}<br>
+                        {{ Fahrzeug.fahrzeug.status }}
 
-                        <input type="hidden" name=" {{ Fahrzeug.name }}" value="{{ Fahrzeug.id }}-{{ Fahrzeug.idUmfassendeKlasse }}">
+                        <input type="hidden" name=" {{ Fahrzeug.fahrzeug.name }}" value="{{ Fahrzeug.fahrzeug.id }}-{{ Fahrzeug.fahrzeug.idUmfassendeKlasse }}">
 
                     </div>
                 </li>
@@ -85,12 +85,12 @@
 <form action="{{ path('Listenauswertung')}}" method="post" id="ListenauswertungUsort" name="Listenauswertung">
     <ul id="SortierListe" class="ListenauswertungUsort">
 
-        {% for Fahrzeug in Fahrzeugsammlung %}
+        {% for Fahrzeug in FahrzeugsammlungUsort %}
             <li>
                 <div class="PlatzhalterModul">
-                    {{ Fahrzeug.name }}
+                    {{ Fahrzeug.fahrzeug.name }}
 
-                    <input type="hidden" name=" {{ Fahrzeug.name }}" value="{{ Fahrzeug.id }}-{{ Fahrzeug.idUmfassendeKlasse }}">
+                    <input type="hidden" name=" {{ Fahrzeug.fahrzeug.name }}" value="{{ Fahrzeug.fahrzeug.id }}-{{ Fahrzeug.fahrzeug.idUmfassendeKlasse }}">
 
                 </div>
             </li>
@@ -104,10 +104,10 @@
             {% for Fahrzeug in FahrzeugsammlungFuerStatus %}
                 <li>
                     <div class="PlatzhalterModulStatus">
-                        {{ Fahrzeug.name }}<br>
-                        {{ Fahrzeug.status }}
+                        {{ Fahrzeug.fahrzeug.name }}<br>
+                        {{ Fahrzeug.fahrzeug.status }}
 
-                        <input type="hidden" name=" {{ Fahrzeug.name }}" value="{{ Fahrzeug.id }}-{{ Fahrzeug.idUmfassendeKlasse }}">
+                        <input type="hidden" name=" {{ Fahrzeug.fahrzeug.name }}" value="{{ Fahrzeug.fahrzeug.id }}-{{ Fahrzeug.fahrzeug.idUmfassendeKlasse }}">
 
                     </div>
                 </li>
