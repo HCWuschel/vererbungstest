@@ -38,7 +38,8 @@ class UmgebendesFahrzeug{
 }
 class FahrzeugProviderService
 {
-private $stadienEnum = ['Zurückgewiesen'=>1,'Angefragt'=>2,'Eingereicht'=>3,'Bestätigt'=>4];
+#public $stadienEnum = array('Zurückgewiesen'=>1=>,'Angefragt'=>2,'Eingereicht'=>3,'Bestätigt'=>4);
+public $stadienEnum = array(1=>'Zurückgewiesen',2=>'Angefragt',3=>'Eingereicht',4=>'Bestätigt');
 
 
 	public function holeEinFahrzeugMitIdEinsUndGibInArray(EntityManagerInterface $entityManager, string $info) :array{
@@ -168,8 +169,10 @@ private $stadienEnum = ['Zurückgewiesen'=>1,'Angefragt'=>2,'Eingereicht'=>3,'Be
 
 	}
 	private function usortStatus($fahrzeug1, $fahrzeug2){
+		//Hole den Passenden Key von Fahrzeug 1 oder 2 auf Grundlage des Status-String,
 		//Wenn <, dann gib -1 zurück, wenn > dann gib +1 zurück uns sortiere entsprechend
-		return $fahrzeug1->getFahrzeug()->getStatus()<=>$fahrzeug2->getFahrzeug()->getStatus();
+
+		return array_keys($this->stadienEnum,$fahrzeug1->getFahrzeug()->getStatus()) <=>array_keys($this->stadienEnum,$fahrzeug2->getFahrzeug()->getStatus());
 
 	}
 	public function sortiereSortierteFahrzeugNachStatusUsort(array $fahrzeugsammlungFürStatus):array{
